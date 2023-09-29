@@ -24,3 +24,20 @@ Grande parte desses argumentos são FALSOS!
 * Evitar complexidade no processo de deploy
 * Equipe pequena
 * Evitar complexidade na operação
+
+"Martim Fowler" - "Monoith First"
+
+
+<!-- Aula [Tipos monolitos] -->
+
+### Tipos de sistemas monoíticos
+
+* "single process" [Foco do curso]
+* Monoliticos distribuidos
+* Black box
+
+### Single process: caracteristicas
+* Alto acoplamento
+* Modular 
+* Modular com bancos de dados segregados
+
