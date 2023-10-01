@@ -41,3 +41,25 @@ Grande parte desses argumentos são FALSOS!
 * Modular 
 * Modular com bancos de dados segregados
 
+
+<!-- Aula [Sistemas monolíticos modulares] -->
+
+DDD é um ponto de partida
+
+* Podemos definir bounded context, separando a aplicação em módulos, pra evitar acoplamento
+
+Módulos possuem isolamento
+
+* Módulos quebrados em "bounded context"
+* Conversam através de contratos e facades
+* Entidades podem ser "dupliadas" tendo apenas os atributos necessários para o contexto
+"Entidade é algo que pode ser identificado por um ID"
+
+Posso ter um User que tem o mesmo ID
+do User do outro módulo, mas com atributos diferentes
+
+O User do modulo Aluno pode ter atributos diferentes do User do modulo Professor
+
+* Equipes especializadas por módulos
+Mesmo estando na mesma aplicação, cada módulo pode ser desenvolvido por uma equipe diferente pois estão em contextos diferentes
+* Alta coesão: O que muda junto, permanece junto
