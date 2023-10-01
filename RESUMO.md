@@ -63,3 +63,15 @@ O User do modulo Aluno pode ter atributos diferentes do User do modulo Professor
 * Equipes especializadas por módulos
 Mesmo estando na mesma aplicação, cada módulo pode ser desenvolvido por uma equipe diferente pois estão em contextos diferentes
 * Alta coesão: O que muda junto, permanece junto
+
+
+<!-- Aula [E os Microsserviços] -->
+### Sistemas monolíticos modulares
+
+* Um único deploy
+* Única operação
+* Observabilidade simplificada
+* Sistemas se comunicando internamente
+* Única linguagem. Menos governança
+
+
