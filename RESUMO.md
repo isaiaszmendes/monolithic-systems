@@ -80,3 +80,5 @@ Mesmo estando na mesma aplicação, cada módulo pode ser desenvolvido por uma e
 DDD tbm tem subdominio
 
 * Subdominio é um contexto isolado
+
+Devemos evitar ao máximo acoplamento, mesmo sendo sistemas monolíticos
