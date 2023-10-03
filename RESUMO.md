@@ -75,3 +75,8 @@ Mesmo estando na mesma aplicação, cada módulo pode ser desenvolvido por uma e
 * Única linguagem. Menos governança
 
 
+# DDD - Domain Driven Design
+
+DDD tbm tem subdominio
+
+* Subdominio é um contexto isolado
