@@ -18,8 +18,14 @@ export class Product extends BaseEntity implements AggregateRoot {
   private _purchasePrice: number;
   private _stock: number;
 
-  constructor() {
-    super();
+  constructor(props: ProductProps) {
+    // super executa o que está no BaseEntity
+    super(props.id);
+    this._name = props.name;
+    this._description = props.description;
+    this._purchasePrice = props.purchasePrice;
+    this._stock = props.stock;
+    
   }
 
 
