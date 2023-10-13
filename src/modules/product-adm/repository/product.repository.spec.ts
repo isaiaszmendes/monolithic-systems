@@ -1,11 +1,12 @@
 import { Sequelize } from "sequelize-typescript";
 import { ProductModel } from "./product.model";
 import { Product } from "../domain/product.entity";
+import { ProductRepository } from "./product.repository";
 
 describe('Product Repository test', () => {
   let sequelize: Sequelize;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     sequelize = new Sequelize({
       dialect: 'sqlite',
       storage: ':memory:',
@@ -17,7 +18,7 @@ describe('Product Repository test', () => {
     await sequelize.sync();
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await sequelize.close();
   });
 
@@ -36,6 +37,10 @@ describe('Product Repository test', () => {
 
     const productDb = await ProductModel.findOne({ where: { id: product.id } });
     
-    expect(productDb).not.toBeNull();
+    expect(product.id.id).toEqual(productDb.id);
+    expect(product.name).toEqual(productDb.name);
+    expect(product.description).toEqual(productDb.description);
+    expect(product.purchasePrice).toEqual(productDb.purchasePrice);
+    expect(product.stock).toEqual(productDb.stock);
   });
 });
