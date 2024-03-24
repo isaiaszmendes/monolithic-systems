@@ -32,6 +32,7 @@ describe('Find All Products UseCase', () => {
     const useCase = new FindAllProductsUseCase(productRepository);
 
     const result = await useCase.execute();
+    expect(productRepository.findAll).toBeCalled();
     expect(result.products.length).toBe(2);
     expect(result.products[0].id).toBe('1');
     expect(result.products[0].name).toBe('Product 1');
