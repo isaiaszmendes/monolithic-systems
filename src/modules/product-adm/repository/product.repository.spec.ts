@@ -64,7 +64,7 @@ describe('Product Repository test', () => {
     expect(result.description).toEqual(product.description);
     expect(result.purchasePrice).toEqual(product.purchasePrice);
     expect(result.stock).toEqual(product.stock);
-    expect(result.createdAt).toEqual(product.createdAt);
-    expect(result.updatedAt).toEqual(product.updatedAt);
+    expect(result.createdAt).toStrictEqual(product.createdAt);
+    expect(result.updatedAt).toStrictEqual(product.updatedAt);
   });
 });
