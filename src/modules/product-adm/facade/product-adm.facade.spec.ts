@@ -24,13 +24,12 @@ describe('ProductAdmFacade Test', () => {
 		await sequelize.close();
 	});
 
-  it('should create a product and check stock', async () => {
+  it('should create a product', async () => {
     const productRepository = new ProductRepository();
     const addProductUseCase = new AddProductUseCase(productRepository);
-    const checkStockUseCase = new CheckStockUseCase(productRepository);
     const productFacade = new ProductAdmFacade({
       addUseCase: addProductUseCase,
-      stockUseCase: checkStockUseCase,
+      stockUseCase: undefined,
     });
 
     const input = {
@@ -51,11 +50,31 @@ describe('ProductAdmFacade Test', () => {
     expect(productDb.description).toBe(input.description);
     expect(productDb.purchasePrice).toBe(input.purchasePrice);
     expect(productDb.stock).toBe(input.stock);
+  });
 
+  it('should check stock', async () => {
+    const productRepository = new ProductRepository();
+    
+    const checkStockUseCase = new CheckStockUseCase(productRepository);
+    const productFacade = new ProductAdmFacade({
+      addUseCase: undefined,
+      stockUseCase: checkStockUseCase,
+    });
+
+    const input = {
+      id: '1',
+      name: 'product name',
+      description: 'product description',
+      purchasePrice: 10,
+      stock: 10,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+
+    await ProductModel.create(input);
     const result = await productFacade.checkStock({ productId: input.id });
 
     expect(result.productId).toBe(input.id);
     expect(result.stock).toBe(input.stock);
-
   });
 })
