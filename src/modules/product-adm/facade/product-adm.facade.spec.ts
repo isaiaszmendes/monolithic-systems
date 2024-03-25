@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize-typescript";
 import { ProductModel } from "../repository/product.model";
 import { ProductRepository } from "../repository/product.repository";
 import { AddProductUseCase } from "../usecase/add-product/add-product.usecase";
+import { CheckStockUseCase } from "../usecase/check-stock/check-stock.usecase";
 import { ProductAdmFacade } from "./product-adm.facade";
 
 describe('ProductAdmFacade Test', () => {
@@ -23,12 +24,13 @@ describe('ProductAdmFacade Test', () => {
 		await sequelize.close();
 	});
 
-  it('should create a product', async () => {
+  it('should create a product and check stock', async () => {
     const productRepository = new ProductRepository();
     const addProductUseCase = new AddProductUseCase(productRepository);
+    const checkStockUseCase = new CheckStockUseCase(productRepository);
     const productFacade = new ProductAdmFacade({
       addUseCase: addProductUseCase,
-      stockUseCase: undefined,
+      stockUseCase: checkStockUseCase,
     });
 
     const input = {
@@ -41,13 +43,19 @@ describe('ProductAdmFacade Test', () => {
 
     await productFacade.addProduct(input);
 
-    const product = await ProductModel.findOne({ where: { id: input.id } });
+    const productDb = await ProductModel.findOne({ where: { id: input.id } });
 
-    expect(product).toBeDefined();
-    expect(product.id).toBe(input.id);
-    expect(product.name).toBe(input.name);
-    expect(product.description).toBe(input.description);
-    expect(product.purchasePrice).toBe(input.purchasePrice);
-    expect(product.stock).toBe(input.stock);
+    expect(productDb).toBeDefined();
+    expect(productDb.id).toBe(input.id);
+    expect(productDb.name).toBe(input.name);
+    expect(productDb.description).toBe(input.description);
+    expect(productDb.purchasePrice).toBe(input.purchasePrice);
+    expect(productDb.stock).toBe(input.stock);
+
+    const result = await productFacade.checkStock({ productId: input.id });
+
+    expect(result.productId).toBe(input.id);
+    expect(result.stock).toBe(input.stock);
+
   });
 })

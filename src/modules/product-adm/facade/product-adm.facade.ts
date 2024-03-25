@@ -18,7 +18,6 @@ export class ProductAdmFacade implements ProductAdmFacadeInterface {
   constructor(useCasesProps: UseCasesProps) {
     this._addProductUseCase = useCasesProps.addUseCase;
     this._checkStockUseCase = useCasesProps.stockUseCase;
-    
   }
 
   addProduct(input: AddProductFacadeInputDTO): Promise<void> {
@@ -32,5 +31,4 @@ export class ProductAdmFacade implements ProductAdmFacadeInterface {
     // converter o dto da facade para o dto do caso de uso
     return this._checkStockUseCase.execute(input);
   }
-  
 }
