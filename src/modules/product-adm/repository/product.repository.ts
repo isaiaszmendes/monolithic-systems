@@ -28,6 +28,8 @@ export class ProductRepository implements ProductGateway {
       description: product.description,
       purchasePrice: product.purchasePrice,
       stock: product.stock,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
     });
   }
 }

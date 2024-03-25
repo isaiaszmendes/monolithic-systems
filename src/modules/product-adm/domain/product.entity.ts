@@ -20,7 +20,7 @@ export class Product extends BaseEntity implements AggregateRoot {
 
   constructor(props: ProductProps) {
     // super executa o que está no BaseEntity
-    super(props.id);
+    super(props.id, props.createdAt, props.updatedAt);
     this._name = props.name;
     this._description = props.description;
     this._purchasePrice = props.purchasePrice;
