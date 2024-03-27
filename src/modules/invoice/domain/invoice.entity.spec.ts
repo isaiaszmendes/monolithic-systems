@@ -1,4 +1,4 @@
-import { InvoiceItems } from "./invoice-items.entity";
+import { InvoiceItem } from "./invoice-item.entity";
 import { Invoice } from "./invoice.entity";
 import { Address } from "./value-object/address/address.value-object";
 
@@ -33,8 +33,8 @@ describe('Invoice Entity Unit Test', () => {
     };
 
     const address = new Address(addressProps);
-    const invoiceItem1 = new InvoiceItems(invoiceItemProps1);
-    const invoiceItem2 = new InvoiceItems(invoiceItemProps2);
+    const invoiceItem1 = new InvoiceItem(invoiceItemProps1);
+    const invoiceItem2 = new InvoiceItem(invoiceItemProps2);
 
     const invoice = new Invoice({
       ...invoiceProps,
@@ -75,7 +75,7 @@ describe('Invoice Entity Unit Test', () => {
     };
 
     const address = new Address(addressProps);
-    const invoiceItem1 = new InvoiceItems(invoiceItemProps1);
+    const invoiceItem1 = new InvoiceItem(invoiceItemProps1);
 
     const invoice = new Invoice({
       ...invoiceProps,
@@ -83,11 +83,42 @@ describe('Invoice Entity Unit Test', () => {
       items: [invoiceItem1]
     });
 
-    const invoiceItem2 = new InvoiceItems(invoiceItemProps2);
+    const invoiceItem2 = new InvoiceItem(invoiceItemProps2);
     invoice.addItem(invoiceItem2);
-
+    
     expect(invoice.items.length).toBe(2);
     expect(invoice.items[0]).toEqual(invoiceItem1);
     expect(invoice.items[1]).toEqual(invoiceItem2);
+  });
+
+  it('should calculate total of invoice', () => {
+    const addressProps = {
+      city: 'São Paulo',
+      complement: 'apto 123',
+      number: '123',
+      state: 'SP',
+      street: 'Rua teste',
+      zipCode: '12345678',
+    };
+    const address = new Address(addressProps);
+
+    const invoiceItem1 = new InvoiceItem({
+      name: 'item 1',
+      price: 95,
+    });
+
+    const invoiceItem2 = new InvoiceItem({
+      name: 'item 2',
+      price: 190,
+    });
+
+    const invoice = new Invoice({
+      name: 'Maria',
+      document: '123456789',
+      address,
+      items: [invoiceItem1, invoiceItem2]
+    });
+
+    expect(invoice.total).toBe(285);
   });
 });
