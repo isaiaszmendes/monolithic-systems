@@ -1,5 +1,5 @@
 import { UseCaseInterface } from "../../../@shared/usecase/use-case.interface";
-import { InvoiceGateway } from "../../domain/gateway/invoice.gateway";
+import { InvoiceGateway } from "../../gateway/invoice.gateway";
 import { FindInvoiceUseCaseInputDTO, FindInvoiceUseCaseOutputDTO } from "./find-invoice.usecase.dto";
 
 export class FindInvoiceUseCase implements UseCaseInterface {

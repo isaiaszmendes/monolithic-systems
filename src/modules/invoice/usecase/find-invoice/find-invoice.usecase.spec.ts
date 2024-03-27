@@ -68,6 +68,6 @@ describe('FindInvoice UseCase Unit Test', () => {
         price: invoice.items[1].price,
       }
     ]);
-    expect(output.total).toBe(invoice.total);
+    expect(output.total).toBe(7200);
   });
 });
