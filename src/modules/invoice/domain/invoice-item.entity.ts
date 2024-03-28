@@ -5,6 +5,8 @@ type InvoiceItemProps = {
   id?: Id,
   name: string
   price: number
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export class InvoiceItem extends BaseEntity {
@@ -12,7 +14,7 @@ export class InvoiceItem extends BaseEntity {
   private _price: number;
 
   constructor(props: InvoiceItemProps) {
-    super(props.id);
+    super(props.id, props.createdAt, props.updatedAt);
     this._name = props.name;
     this._price = props.price;
     this.validate();
