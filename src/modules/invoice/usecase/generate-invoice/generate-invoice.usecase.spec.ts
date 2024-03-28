@@ -41,7 +41,7 @@ const invoice = new Invoice({
 
 const MockRepository = () => ({
   find: jest.fn(),
-  generate: jest.fn().mockResolvedValue(Promise.resolve(invoice)),
+  generate: jest.fn(),
 });
 
 describe('GenerateInvoice UseCase Unit Test', () => {
@@ -66,7 +66,7 @@ describe('GenerateInvoice UseCase Unit Test', () => {
 
     const output = await useCase.execute(input);
 
-    expect(output.id).toBe(invoice.id.id);
+    expect(output.id).toBeDefined();
     expect(output.name).toBe(invoice.name);
     expect(output.document).toBe(invoice.document);
     expect(output.city).toBe(invoice.address.city);
@@ -88,6 +88,6 @@ describe('GenerateInvoice UseCase Unit Test', () => {
       }
     ]);
 
-    expect(output.total).toBe(5760); // 5760
+    expect(output.total).toBe(5760);
   });
 });

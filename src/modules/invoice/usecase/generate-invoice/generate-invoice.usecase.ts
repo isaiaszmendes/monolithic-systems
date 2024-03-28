@@ -29,24 +29,24 @@ export class GenerateInvoiceUseCase implements UseCaseInterface {
       items,
     });
 
-    const output = await this.invoiceRepository.generate(invoice);
+    await this.invoiceRepository.generate(invoice);
 
     return {      
-      id: output.id.id,
-      name: output.name,
-      document: output.document,
-      city: output.address.city,
-      complement: output.address.complement,
-      number: output.address.number,
-      state: output.address.state,
-      street: output.address.street,
-      zipCode: output.address.zipCode,
-      items: output.items.map(item => ({
+      id: invoice.id.id,
+      name: invoice.name,
+      document: invoice.document,
+      city: invoice.address.city,
+      complement: invoice.address.complement,
+      number: invoice.address.number,
+      state: invoice.address.state,
+      street: invoice.address.street,
+      zipCode: invoice.address.zipCode,
+      items: invoice.items.map(item => ({
         id: item.id.id,
         name: item.name,
         price: item.price,
       })),
-      total: output.total,
+      total: invoice.total,
     };
   }
 }
