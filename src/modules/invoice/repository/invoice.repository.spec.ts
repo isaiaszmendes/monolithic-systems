@@ -27,7 +27,7 @@ describe('Invoice Repository test', () => {
 		await sequelize.close();
 	});
 
-  it('should create a invoice', async () => {
+  it('should generate a invoice', async () => {
     const invoiceProps = {
       id: new Id("1"),
       name: 'John silva',
@@ -97,5 +97,74 @@ describe('Invoice Repository test', () => {
     expect(invoice.address.street).toEqual(addressProps.street);
     expect(invoice.address.zipCode).toEqual(addressProps.zipCode);
     expect(invoice.items).toEqual([item]);
+  });
+
+  it('should find a invoice by id', async () => {
+    const invoiceProps = {
+      id: new Id("1"),
+      name: 'John silva',
+      document: '123456789',
+    };
+
+    const addressProps = {
+      city: 'New York',
+      complement: 'Near the park',
+      number: '123',
+      state: 'NY',
+      street: 'Park Avenue',
+      zipCode: '123456',
+    };
+
+    const itemProps = {
+      id: new Id('12'),
+      name: 'Product 1',
+      price: 100,
+    };
+
+    const address = new Address(addressProps);
+    const item = new InvoiceItem(itemProps);
+    const invoice = new Invoice({
+      ...invoiceProps,
+      address,
+      items: [item],
+    });
+
+    await InvoiceModel.create({
+      id: invoice.id.id,
+      name: invoice.name,
+      document: invoice.document,
+      city: invoice.address.city,
+      complement: invoice.address.complement,
+      number: invoice.address.number,
+      state: invoice.address.state,
+      street: invoice.address.street,
+      zipCode: invoice.address.zipCode,
+      items: invoice.items.map((item: InvoiceItem) => ({
+        id: item.id.id,
+        name: item.name,
+        price: item.price,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+      })),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      include: [
+        { model: InvoiceItemModel },
+      ]
+    });
+    const invoiceRepository = new InvoiceRepository();
+    const result = await invoiceRepository.find(invoice.id.id);
+
+    expect(result.id.id).toEqual(invoiceProps.id.id);
+    expect(result.name).toEqual(invoiceProps.name);
+    expect(result.document).toEqual(invoiceProps.document);
+    expect(result.address.city).toEqual(addressProps.city);
+    expect(result.address.complement).toEqual(addressProps.complement);
+    expect(result.address.number).toEqual(addressProps.number);
+    expect(result.address.state).toEqual(addressProps.state);
+    expect(result.address.street).toEqual(addressProps.street);
+    expect(result.address.zipCode).toEqual(addressProps.zipCode);
+    expect(result.items).toEqual([item]);
   });
 });
