@@ -1,7 +1,7 @@
 import { UseCaseInterface } from "../../@shared/usecase/use-case.interface";
 import { AddClientFacadeInputDTO, ClientAdmFacadeInterface, FindClientFacadeInputDTO, FindClientFacadeOutputDTO } from "./client-adm.facade.interface";
 
-export interface UseCaseProps {
+interface ClientAdmFacadeProps {
   addUseCase: UseCaseInterface;
   findUseCase: UseCaseInterface;
 }
@@ -10,7 +10,7 @@ export class ClientAdmFacade implements ClientAdmFacadeInterface {
   private _addUseCase: UseCaseInterface;
   private _findUseCase: UseCaseInterface;
 
-  constructor(useCaseProps: UseCaseProps) {
+  constructor(useCaseProps: ClientAdmFacadeProps) {
     this._addUseCase = useCaseProps.addUseCase;
     this._findUseCase = useCaseProps.findUseCase;
   }
