@@ -58,45 +58,18 @@ describe('Invoice Repository test', () => {
     });
 
     const invoiceRepository = new InvoiceRepository();
-    await invoiceRepository.generate(invoiceInput);
+    const result = await invoiceRepository.generate(invoiceInput);
 
-    const invoiceDb = await InvoiceModel.findOne({
-        where: { id: invoiceProps.id.id },
-        rejectOnEmpty: true,
-        include: ['items']
-      });
-
-    const invoice = new Invoice({
-      id: new Id(invoiceDb.id),
-      name: invoiceDb.name,
-      document: invoiceDb.document,
-      address: new Address({
-        city: invoiceDb.city,
-        complement: invoiceDb.complement,
-        number: invoiceDb.number,
-        state: invoiceDb.state,
-        street: invoiceDb.street,
-        zipCode: invoiceDb.zipCode,
-      }),
-      items: invoiceDb.items.map((item) => new InvoiceItem({
-        id: new Id(item.id),
-        name: item.name,
-        price: item.price,
-        createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
-      })),
-    });
-
-    expect(invoice.id.id).toEqual(invoiceProps.id.id);
-    expect(invoice.name).toEqual(invoiceProps.name);
-    expect(invoice.document).toEqual(invoiceProps.document);
-    expect(invoice.address.city).toEqual(addressProps.city);
-    expect(invoice.address.complement).toEqual(addressProps.complement);
-    expect(invoice.address.number).toEqual(addressProps.number);
-    expect(invoice.address.state).toEqual(addressProps.state);
-    expect(invoice.address.street).toEqual(addressProps.street);
-    expect(invoice.address.zipCode).toEqual(addressProps.zipCode);
-    expect(invoice.items).toEqual([item]);
+    expect(result.id.id).toEqual(invoiceProps.id.id);
+    expect(result.name).toEqual(invoiceProps.name);
+    expect(result.document).toEqual(invoiceProps.document);
+    expect(result.address.city).toEqual(addressProps.city);
+    expect(result.address.complement).toEqual(addressProps.complement);
+    expect(result.address.number).toEqual(addressProps.number);
+    expect(result.address.state).toEqual(addressProps.state);
+    expect(result.address.street).toEqual(addressProps.street);
+    expect(result.address.zipCode).toEqual(addressProps.zipCode);
+    expect(result.items).toEqual([item]);
   });
 
   it('should find a invoice by id', async () => {
