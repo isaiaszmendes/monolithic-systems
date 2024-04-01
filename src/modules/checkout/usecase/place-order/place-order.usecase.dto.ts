@@ -1,11 +1,11 @@
-export interface PlaceOrderInputDTO {
+export interface PlaceOrderUseCaseInputDTO {
   clientId: string;
   products: {
     productId: string;
   }[];
 }
 
-export interface PlaceOrderOutputDTO {
+export interface PlaceOrderUseCaseOutputDTO {
   id: string;
   invoiceId: string;
   status: string;

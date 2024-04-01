@@ -9,7 +9,7 @@ const client = new Client({
 
 const MockRepository = () => ({
   add: jest.fn(),
-  find: jest.fn().mockResolvedValue(Promise.resolve(client)),
+  find: jest.fn().mockResolvedValue(client),
 });
 
 describe('Find Client Usecase Unit Test', () => {
