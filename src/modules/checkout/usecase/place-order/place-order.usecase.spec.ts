@@ -158,7 +158,7 @@ describe('PlaceOrder Use Case Unit Test', () => {
       expect(mockValidateProducts).toHaveBeenCalledTimes(1);
     });
 
-    describe.skip('place an order', () => {
+    describe('place an order', () => {
 
       const clientProps = {
         id: '7f',
@@ -184,19 +184,21 @@ describe('PlaceOrder Use Case Unit Test', () => {
 
       const mockCheckoutRepository = {
         addOrder: jest.fn(),
+        findOrder: jest.fn(),
       };
 
       const mockInvoiceFacade = {
         generate: jest.fn().mockResolvedValue({ id: '1i' }),
+        find: jest.fn(),
       };
 
       const placeOrderUseCase = new PlaceOrderUseCase(
         mockClientFacade,
         null,
         null,
-        // mockCheckoutRepository,
-        // mockInvoiceFacade,
-        // mockPaymentFacade,
+        mockCheckoutRepository,
+        mockInvoiceFacade,
+        mockPaymentFacade,
       );
 
       const products = {

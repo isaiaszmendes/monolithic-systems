@@ -28,7 +28,13 @@ describe('ClientAdmFacade Factory Test', () => {
       id: '1',
       name: 'client name',
       email: 'client email',
-      address: 'client address',
+      document: 'client document',
+      street: 'client street',
+      number: 'client number',
+      complement: 'client complement',
+      city: 'client city',
+      state: 'client state',
+      zipCode: 'client zipCode',
     }
 
     await clientFacade.add(input);
@@ -38,7 +44,13 @@ describe('ClientAdmFacade Factory Test', () => {
     expect(clientDb.id).toBe(input.id);
     expect(clientDb.name).toBe(input.name);
     expect(clientDb.email).toBe(input.email);
-    expect(clientDb.address).toBe(input.address);
+    expect(clientDb.document).toBe(input.document);
+    expect(clientDb.street).toBe(input.street);
+    expect(clientDb.number).toBe(input.number);
+    expect(clientDb.complement).toBe(input.complement);
+    expect(clientDb.city).toBe(input.city);
+    expect(clientDb.state).toBe(input.state);
+    expect(clientDb.zipCode).toBe(input.zipCode);
     expect(clientDb.createdAt).toBeDefined();
     expect(clientDb.updatedAt).toBeDefined();
   });
@@ -50,7 +62,13 @@ describe('ClientAdmFacade Factory Test', () => {
       id: '1',
       name: 'client name',
       email: 'client email',
-      address: 'client address',
+      document: 'client document',
+      street: 'client street',
+      number: 'client number',
+      complement: 'client complement',
+      city: 'client city',
+      state: 'client state',
+      zipCode: 'client zipCode',
       createdAt: new Date(),
       updatedAt: new Date(),
     }
@@ -62,6 +80,12 @@ describe('ClientAdmFacade Factory Test', () => {
     expect(client.id).toBe(input.id);
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.document).toBe(input.document);
+    expect(client.street).toBe(input.street);
+    expect(client.number).toBe(input.number);
+    expect(client.complement).toBe(input.complement);
+    expect(client.city).toBe(input.city);
+    expect(client.state).toBe(input.state);
+    expect(client.zipCode).toBe(input.zipCode);
   });
 });
