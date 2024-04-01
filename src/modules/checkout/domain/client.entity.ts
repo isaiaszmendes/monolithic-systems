@@ -21,6 +21,7 @@ export class Client extends BaseEntity {
     super(props.id);
     this._name = props.name;
     this._email = props.email;
+    this._document = props.document;
     this._address = props.address;
   }
 
